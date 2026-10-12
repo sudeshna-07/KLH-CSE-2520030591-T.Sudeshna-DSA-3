@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Chain Multiplication Optimizer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">MCM</div>
+            <div>
+                <h1>Matrix Chain Multiplication</h1>
+                <p>Dynamic Programming Optimization Tool</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="intro">
+            <span class="eyebrow">DSA-3 PROJECT</span>
+            <h2>Find the most efficient multiplication order</h2>
+            <p>Enter matrix dimensions to compare the optimal strategy with multiplying matrices from left to right.</p>
+        </section>
+
+        <section class="panel">
+            <h2>Enter Matrix Dimensions</h2>
+            <p class="muted">
+                Example: <code>40 20 30 10</code> represents three matrices:
+                A1 (40 × 20), A2 (20 × 30), and A3 (30 × 10).
+            </p>
+
+            <label for="dimensions">Dimensions (space-separated integers)</label>
+            <textarea id="dimensions" rows="3"
+                placeholder="Example: 40 20 30 10"></textarea>
+
+            <div class="button-row">
+                <button id="optimizeBtn" class="btn btn-primary">Run Optimization</button>
+                <button id="clearBtn" class="btn btn-secondary">Clear</button>
+            </div>
+            <p id="message" class="message" role="status" aria-live="polite"></p>
+        </section>
+
+        <section class="panel">
+            <h2>Sample Dataset</h2>
+            <p class="muted">Load an example or manage your CSV dataset.</p>
+
+            <label for="datasetSelect">Choose a test case</label>
+            <select id="datasetSelect">
+                <option value="">Loading dataset...</option>
+            </select>
+
+            <div class="button-row">
+                <button id="loadBtn" class="btn btn-secondary">Load Selected Case</button>
+                <button id="downloadBtn" class="btn btn-secondary">Download CSV</button>
+                <label class="btn btn-secondary upload-label" for="uploadInput">Upload CSV</label>
+                <input id="uploadInput" type="file" accept=".csv,text/csv" hidden>
+            </div>
+
+            <p class="muted small">
+                Uploading a CSV updates the dataset used by this local website.
+                Keep the column headers in the same format as the sample dataset.
+            </p>
+        </section>
+
+        <section id="results" hidden>
+            <div class="results-title">
+                <span class="eyebrow">RESULTS</span>
+                <h2>Optimization Results</h2>
+            </div>
+
+            <div class="metrics">
+                <article class="metric-card">
+                    <p>Optimal Cost</p>
+                    <h3 id="optimalCost">—</h3>
+                    <span>Scalar multiplications</span>
+                </article>
+
+                <article class="metric-card">
+                    <p>Left-to-Right Cost</p>
+                    <h3 id="leftCost">—</h3>
+                    <span>Scalar multiplications</span>
+                </article>
+
+                <article class="metric-card">
+                    <p>Cost Saved</p>
+                    <h3 id="savedCost">—</h3>
+                    <span id="savedPercent">—</span>
+                </article>
+
+                <article class="metric-card">
+                    <p>Number of Matrices</p>
+                    <h3 id="matrixCount">—</h3>
+                    <span>Input chain</span>
+                </article>
+            </div>
+
+            <article class="panel">
+                <h2>Optimal Parenthesization</h2>
+                <p id="parenthesization" class="parenthesization">—</p>
+            </article>
+
+            <article class="panel">
+                <h2>Cost Comparison Chart</h2>
+                <p class="muted">
+                    Compare the left-to-right strategy with the optimal Dynamic Programming result.
+                </p>
+                <div id="costChart" class="cost-chart">
+                    Run optimization to display the chart.
+                </div>
+                <p id="chartSummary" class="chart-summary"></p>
+            </article>
+
+            <article class="panel">
+                <h2>Step-by-Step DP Walkthrough</h2>
+                <p class="muted">
+                    Explore the stages used to find the minimum multiplication cost.
+                </p>
+
+                <div class="step-progress">
+                    <span id="stepCounter">Run optimization to begin</span>
+                    <div class="step-progress-track">
+                        <div id="stepProgressFill" class="step-progress-fill"></div>
+                    </div>
+                </div>
+
+                <div id="dpStepContent" class="dp-step-content">
+                    <h3>Run optimization first</h3>
+                    <p>Enter dimensions and click Run Optimization to begin the walkthrough.</p>
+                </div>
+
+                <div class="button-row">
+                    <button id="prevStepBtn" class="btn btn-secondary" disabled>
+                        Previous Step
+                    </button>
+                    <button id="nextStepBtn" class="btn btn-primary" disabled>
+                        Next Step
+                    </button>
+                </div>
+            </article>
+
+            <div class="table-grid">
+                <article class="panel">
+                    <h2>Cost Table</h2>
+                    <p class="muted small">Minimum cost for each matrix interval.</p>
+                    <div class="table-wrapper">
+                        <table id="costTable"></table>
+                    </div>
+                </article>
+
+                <article class="panel">
+                    <h2>Split Table</h2>
+                    <p class="muted small">The split position selected for each interval.</p>
+                    <div class="table-wrapper">
+                        <table id="splitTable"></table>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="panel complexity">
+            <h2>Algorithm Complexity</h2>
+            <div class="complexity-grid">
+                <div>
+                    <span>Time Complexity</span>
+                    <strong>O(n³)</strong>
+                </div>
+                <div>
+                    <span>Space Complexity</span>
+                    <strong>O(n²)</strong>
+                </div>
+                <div>
+                    <span>Maximum Input</span>
+                    <strong>500 matrices</strong>
+                </div>
+            </div>
+            <p class="muted small">
+                The DP algorithm uses cubic time and quadratic space.
+                Runtime depends on the computer and input size.
+            </p>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
