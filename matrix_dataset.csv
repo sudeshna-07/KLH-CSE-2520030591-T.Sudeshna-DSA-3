@@ -1,0 +1,14 @@
+
+TestCase,Dimensions,Category,Description
+TC01,"10 20 30",Small,Two matrices
+TC02,"40 20 30 10",Small,Three matrices demonstrating cost savings
+TC03,"10 30 5 60",Small,Three matrices with varied dimensions
+TC04,"5 10 3 12 5",Small,Four matrices
+TC05,"30 35 15 5 10 20",Medium,Five matrices
+TC06,"5 10 20 5 4 15 30",Medium,Six matrices
+TC07,"12 8 25 6 18 9 30 4",Medium,Seven matrices
+TC08,"20 5 15 30 10 25 8 12 6",Medium,Eight matrices
+TC09,"8 12 6 20 4 16 10 25 5 14 7",Medium,Ten matrices
+TC10,"15 25 10 20 5 30 12 8 18 6 22 9",Large,Eleven matrices
+TC11,"10 15 20 25 30 12 18 8 16 24 6 14 22 9",Large,Thirteen matrices
+TC12,"6 18 12 24 8 20 10 30 5 15 25 7 14 21 9 16",Large,Fifteen matrices
